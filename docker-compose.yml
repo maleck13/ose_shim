@@ -1,0 +1,12 @@
+
+ose_shim:
+  restart: always
+  image: ose_shim
+  ports:
+    - "3000:3000"
+    
+  
+  
+
+
+
