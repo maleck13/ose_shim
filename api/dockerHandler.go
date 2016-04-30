@@ -5,6 +5,9 @@ import (
 	"os/exec"
 	"encoding/json"
 	"io"
+	"os"
+	"github.com/Sirupsen/logrus"
+	"fmt"
 )
 
 
@@ -22,8 +25,21 @@ func (fw *flushWriter) Write(p []byte) (n int, err error) {
 	return
 }
 
+func isAuthed(headers http.Header)bool{
+	auth := os.Getenv("auth")
+	if "" == auth {
+		logrus.Info("no auth set no requests allowed. Set auth in the env")
+		return false
+	}
+	hAuth := headers.Get("x-auth")
+	return auth == hAuth
+}
+
 //Pull docker images stream result back to client
 func ImagePull(rw http.ResponseWriter, req *http.Request)HttpError{
+	if ! isAuthed(req.Header){
+		return NewHttpError(fmt.Errorf("not authed"),http.StatusUnauthorized)
+	}
 	fw := flushWriter{w: rw}
 	if f, ok := rw.(http.Flusher); ok {
 		fw.f = f
