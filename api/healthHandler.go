@@ -1,9 +1,10 @@
 package api
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 )
+
 //handler to add health checks to.
 func HealthHandler(rw http.ResponseWriter, req *http.Request) HttpError {
 	//fill in health checks here
@@ -11,12 +12,12 @@ func HealthHandler(rw http.ResponseWriter, req *http.Request) HttpError {
 	return nil
 }
 
-func Ping(rw http.ResponseWriter, req *http.Request) HttpError{
+func Ping(rw http.ResponseWriter, req *http.Request) HttpError {
 	res := make(map[string]string)
 	res["ok"] = "200"
 	encoder := json.NewEncoder(rw)
-	if err := encoder.Encode(res); err != nil{
-		return NewHttpError(err,http.StatusInternalServerError)
+	if err := encoder.Encode(res); err != nil {
+		return NewHttpError(err, http.StatusInternalServerError)
 	}
 	return nil
 }

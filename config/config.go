@@ -2,8 +2,9 @@ package config
 
 import (
 	"encoding/json"
+
 	"github.com/Sirupsen/logrus"
-	
+
 	"io/ioutil"
 	"os"
 )
@@ -11,36 +12,39 @@ import (
 //use an interface to limit access to the config object to read only
 type Configuration interface {
 	GetPProfEnabled() bool
-	GetDockerUser()string
-	GetDockerPass()string
-	GetDockerRegistry()string
+	GetDockerUser() string
+	GetDockerPass() string
+	GetDockerRegistry() string
+	GetDockerEmail() string
 }
 
 type config struct {
-	PProfEnabled  bool `json:"pprof_enabled"`
-	DockerUser string `json:"-"`
-	DockerPass string `json:"-"`
+	PProfEnabled   bool   `json:"pprof_enabled"`
+	DockerUser     string `json:"-"`
+	DockerPass     string `json:"-"`
 	DockerRegistry string `json:"-"`
+	DockerEmail    string `json:"-"`
 }
 
-
-
-func (c *config) GetDockerUser()string{
+func (c *config) GetDockerUser() string {
 	return os.Getenv("docker_user")
 }
 
-func (c *config) GetDockerPass()string{
+func (c *config) GetDockerPass() string {
 	return os.Getenv("docker_pass")
 }
 
-func (c *config) GetDockerRegistry()string{
+func (c *config) GetDockerEmail() string {
+	return os.Getenv("docker_email")
+}
+
+func (c *config) GetDockerRegistry() string {
 	return os.Getenv("docker_registry")
 }
 
 func (c *config) GetPProfEnabled() bool {
 	return c.PProfEnabled
 }
-
 
 var Conf Configuration
 
@@ -62,4 +66,3 @@ func SetGlobalConfig(path string) {
 		return
 	}
 }
-

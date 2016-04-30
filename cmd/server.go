@@ -2,11 +2,12 @@ package cmd
 
 import (
 	"log"
+
 	"github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
 	"github.com/maleck13/ose_shim/api"
 	"github.com/maleck13/ose_shim/config"
-       
+
 	"net/http"
 	_ "net/http/pprof"
 )
@@ -39,8 +40,7 @@ func ServeCommand() cli.Command {
 func serve(context *cli.Context) {
 	config.SetGlobalConfig(configPath)
 	logrus.SetFormatter(&logrus.JSONFormatter{})
-	
-        
+
 	router := api.NewRouter()
 	if config.Conf.GetPProfEnabled() {
 		go func() {
@@ -52,4 +52,3 @@ func serve(context *cli.Context) {
 		logrus.Fatal(err)
 	}
 }
-

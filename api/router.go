@@ -1,10 +1,10 @@
 package api
 
 import (
-	"github.com/gorilla/mux"
 	"net/http"
-	"github.com/codegangsta/negroni"
 
+	"github.com/codegangsta/negroni"
+	"github.com/gorilla/mux"
 )
 
 type HttpHandler func(wr http.ResponseWriter, req *http.Request) HttpError
@@ -18,13 +18,11 @@ func NewRouter() http.Handler {
 	n := negroni.New(recovery)
 	//add some top level routes
 
-	r.HandleFunc("/sys/info/health",RouteErrorHandler(HealthHandler))
-	r.HandleFunc("/sys/info/ping",RouteErrorHandler(Ping))
-	r.HandleFunc("/docker/images",RouteErrorHandler(ImagePull)).Methods("POST")
+	r.HandleFunc("/sys/info/health", RouteErrorHandler(HealthHandler))
+	r.HandleFunc("/sys/info/ping", RouteErrorHandler(Ping))
+	r.HandleFunc("/docker/images", RouteErrorHandler(ImagePull)).Methods("POST")
 	//wire up middleware and router
 	n.UseHandler(r)
 
-	return n  //negroni implements the http.Handler interface
+	return n //negroni implements the http.Handler interface
 }
-
-

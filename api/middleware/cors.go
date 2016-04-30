@@ -1,9 +1,10 @@
 package middleware
 
 import (
+	"net/http"
+
 	"github.com/Sirupsen/logrus"
 	"github.com/codegangsta/negroni"
-	"net/http"
 )
 
 const (

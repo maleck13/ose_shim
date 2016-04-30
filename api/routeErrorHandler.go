@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+
 	"github.com/Sirupsen/logrus"
 )
 
@@ -14,7 +15,7 @@ func RouteErrorHandler(handler HttpHandler) http.HandlerFunc {
 		//may change to use a context object containing other data
 		if err := handler(wr, req); err != nil {
 			//todo make this better
-			logrus.Error("handler error: ", err , " " + err.ErrorContext() , " path: " + req.URL.Path, " method: " + req.Method)
+			logrus.Error("handler error: ", err, " "+err.ErrorContext(), " path: "+req.URL.Path, " method: "+req.Method)
 			wr.WriteHeader(err.HttpErrorCode())
 			encoder.Encode(err)
 			return
@@ -22,4 +23,3 @@ func RouteErrorHandler(handler HttpHandler) http.HandlerFunc {
 
 	}
 }
-

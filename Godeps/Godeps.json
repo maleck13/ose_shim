@@ -1,46 +1,8 @@
 {
 	"ImportPath": "github.com/maleck13/ose_shim",
 	"GoVersion": "go1.6",
-	"GodepVersion": "v62",
 	"Packages": [
 		"./..."
 	],
-	"Deps": [
-		{
-			"ImportPath": "github.com/Sirupsen/logrus",
-			"Comment": "v0.8.6-7-g9c060de",
-			"Rev": "9c060de643590dae45da9d7c26276463bfc46fa0"
-		},
-		{
-			"ImportPath": "github.com/codegangsta/cli",
-			"Comment": "1.2.0-224-gaca5b04",
-			"Rev": "aca5b047ed14d17224157c3434ea93bf6cdaadee"
-		},
-		{
-			"ImportPath": "github.com/codegangsta/negroni",
-			"Comment": "v0.1-70-gc7477ad",
-			"Rev": "c7477ad8e330bef55bf1ebe300cf8aa67c492d1b"
-		},
-		{
-			"ImportPath": "github.com/davecgh/go-spew/spew",
-			"Rev": "5215b55f46b2b919f50a1df0eaa5886afe4e3b3d"
-		},
-		{
-			"ImportPath": "github.com/gorilla/context",
-			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
-		},
-		{
-			"ImportPath": "github.com/gorilla/mux",
-			"Rev": "48e889f422c9702f924e53b095546239a1253159"
-		},
-		{
-			"ImportPath": "github.com/pmezard/go-difflib/difflib",
-			"Rev": "d8ed2627bdf02c080bf22230dbb337003b7aba2d"
-		},
-		{
-			"ImportPath": "github.com/stretchr/testify/assert",
-			"Comment": "v1.0-80-g67106a5",
-			"Rev": "67106a5111a06241c8d84952c33214675f51a34a"
-		}
-	]
+	"Deps": []
 }

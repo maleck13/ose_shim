@@ -1,9 +1,10 @@
 package main
 
 import (
+	"os"
+
 	"github.com/codegangsta/cli"
 	"github.com/maleck13/ose_shim/cmd"
-	"os"
 )
 
 func main() {
@@ -17,4 +18,3 @@ func main() {
 	app.Run(os.Args)
 
 }
-

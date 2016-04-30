@@ -2,13 +2,14 @@ package api_test
 
 import (
 	"encoding/json"
-	"github.com/stretchr/testify/assert"
-	"github.com/maleck13/ose_shim/api"
-	"github.com/maleck13/ose_shim/config"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/maleck13/ose_shim/api"
+	"github.com/maleck13/ose_shim/config"
+	"github.com/stretchr/testify/assert"
 )
 
 //todo add tests for other index methods
