@@ -13,12 +13,13 @@ import (
 	"github.com/maleck13/ose_shim/config"
 )
 
+//implements an io.Writer that immediately flushes to buffer
 type flushWriter struct {
 	f http.Flusher
 	w io.Writer
 }
 
-//override the write method so that we flush immediately
+//override the write method so that we flush immediately. Meaning we can stream the command output as it happens
 func (fw *flushWriter) Write(p []byte) (n int, err error) {
 	n, err = fw.w.Write(p)
 	if fw.f != nil {
@@ -27,6 +28,7 @@ func (fw *flushWriter) Write(p []byte) (n int, err error) {
 	return
 }
 
+//check out auth header
 func isAuthed(headers http.Header) bool {
 	auth := os.Getenv("auth")
 	if "" == auth {
@@ -66,6 +68,7 @@ func ImagePull(rw http.ResponseWriter, req *http.Request) HttpError {
 	return nil
 }
 
+//utility type for holding docker credentials pulled from env
 type dockerCredentials struct {
 	User  string
 	Pass  string
@@ -90,6 +93,7 @@ func newDockerCredentials(headers http.Header) dockerCredentials {
 	return dockerCredentials{User: user, Pass: pass, Email: email}
 }
 
+//utility function for running a docker login commands
 func dockerLogin(credentials dockerCredentials) error {
 
 	cmd := exec.Command("docker", "login", "-u", strings.TrimSpace(credentials.User), "-p", strings.TrimSpace(credentials.Pass), "-e", strings.TrimSpace(credentials.Email))
