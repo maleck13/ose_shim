@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/Sirupsen/logrus"
 	"fmt"
+
+	"github.com/Sirupsen/logrus"
 )
 
 //Wraps route handlers so that if there is an error returned we don't need to duplicate the error handling
@@ -15,7 +16,7 @@ func RouteErrorHandler(handler HttpHandler) http.HandlerFunc {
 		encoder := json.NewEncoder(wr)
 		//may change to use a context object containing other data
 		if err := handler(wr, req); err != nil {
-			logrus.Error("handler error: ",err, fmt.Sprintf(" file : %s Line %d",err.SourceFile(),err.LineNumber()))
+			logrus.Error("handler error: ", err, fmt.Sprintf(" file : %s Line %d", err.SourceFile(), err.LineNumber()))
 			wr.WriteHeader(err.HttpErrorCode())
 			encoder.Encode(err)
 			return

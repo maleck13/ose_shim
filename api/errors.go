@@ -8,26 +8,26 @@ import (
 type HttpError interface {
 	HttpErrorCode() int
 	ErrorContext() string
-	LineNumber()int
-	SourceFile()string
+	LineNumber() int
+	SourceFile() string
 }
 
 type HttpHandlerError struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 	Context string `json:"context"`
-	Line int `json:"-"`
-	File string `json:"-"`
+	Line    int    `json:"-"`
+	File    string `json:"-"`
 }
 
 func NewHttpError(err error, code int) HttpError {
-	_, f, n,_ := runtime.Caller(1)
-	return &HttpHandlerError{Message: err.Error(), Code: code, Line:n ,File:f}
+	_, f, n, _ := runtime.Caller(1)
+	return &HttpHandlerError{Message: err.Error(), Code: code, Line: n, File: f}
 }
 
 func NewHttpErrorWithContext(err error, code int, context string) HttpError {
-	_, f, n,_ := runtime.Caller(1)
-	return &HttpHandlerError{Message: err.Error(), Code: code, Context: context,Line:n,File:f}
+	_, f, n, _ := runtime.Caller(1)
+	return &HttpHandlerError{Message: err.Error(), Code: code, Context: context, Line: n, File: f}
 }
 
 func (he *HttpHandlerError) Error() string {
@@ -42,10 +42,10 @@ func (he *HttpHandlerError) HttpErrorCode() int {
 	return he.Code
 }
 
-func (he *HttpHandlerError)LineNumber()int {
+func (he *HttpHandlerError) LineNumber() int {
 	return he.Line
 }
 
-func (he *HttpHandlerError)SourceFile()string  {
+func (he *HttpHandlerError) SourceFile() string {
 	return he.File
 }
